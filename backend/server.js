@@ -26,6 +26,28 @@ app.get('/books', (req, res)=>{
     })
 })
 
+//create new book route :/create-new-book
+app.post('/create-new-book', (req, res)=>{
+    const { title, author, pages, pub_date }= req.body
+    if(!title || !author || !pages || !pub_date){
+        return res.status(400).json({
+            message: 'All inputs are required!'
+        })
+    }
+
+    con.query(`INSERT INTO books VALUES(NULL, '${title}', '${author}', '${pages}', '${pub_date}')`, (err)=>{
+        if(err){
+            return res.status(500).json({
+                message: 'Internal Server Error',
+                errorMessage: err.message
+            })
+        }
+        return res.status(201).json({
+            message: 'Book Created Successfully!'
+        })
+    })
+})
+
 
 
 //starting dev server
