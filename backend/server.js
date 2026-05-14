@@ -10,7 +10,7 @@ app.use(express.urlencoded({extended: true}))
 app.use(cors())
 
 //API ROUTES FOR CRUD OPERATIONS HTTP METHODS [GET, POST, PUT/PATCH, DELETE]
-app.get('/books', (req, res)=>{
+app.get('/', (req, res)=>{
     con.query('SELECT * FROM books', (err, data)=>{
         if(err){
             return res.status(500).json({
